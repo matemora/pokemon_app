@@ -1,0 +1,48 @@
+form {
+    text-align: center;
+}
+
+form fieldset {
+    border: 0px;
+    display: flex;
+    text-align: left;
+}
+
+form fieldset legend {
+    font-size: 24px;
+}
+
+form .field {
+    flex:1;
+    margin-right: 8px;
+    display:flex;
+    flex-direction: column;
+}
+
+form .field-group {
+    display: flex;
+}
+
+form .radio {
+    margin-right: 8px;
+    margin-top: 8px;
+}
+
+form .radio-options {
+    display: flex;
+}
+
+form button {
+    width: 200px;
+    height: 48px;
+    border-radius: 8px;
+    color: black;
+    border: 0;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: gainsboro;
+}
+
+form button:hover {
+    background-color: darkgray;
+}

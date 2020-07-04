@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon App</title>
+
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+
+<body>
+    <header>
+        Pokemon random selector
+    </header>
+    <main>
+        <h1>Bem vindo ao pokemon random selector!</h1>
+        <p>Nesse app você seleciona pokemons de forma randômica baseando-se em alguns filtros pre-definidos</p>
+    </main>
+    <form>
+        <div class="fieldset">
+            <fieldset>
+                <legend>Filtros</legend>
+                <div class="field-group">
+                    <div class="field">
+                        <label for="generation">Geração</label>
+                        <select name="generation" id="generation">Geração
+                            <option value>Selecione a geração</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="type1">Tipo (1)</label>
+                        <select name="type1" id="type1">
+                            <option value>Selecione o tipo principal</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="type2">Tipo (2)</label>
+                        <select name="type2" id="type2">
+                            <option value>Selecione o tipo secundário</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="abilities">Habilidades</label>
+                        <select name="abilities" id="abilities">
+                            <option value>Selecione uma habilidade</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="radio">
+                    <label for="legendary">Lendário</label>
+                    <div name="lendario" class="radio-options">
+                        <div class="option">
+                            <input name="legendary" type="radio" value="true">Sim
+                        </div>
+                        <div class="option">
+                            <input name="legendary" type="radio" value="false" checked>Não
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        <button type="button" id="search">Pesquisar</button>
+    </div>
+    </form>
+    <div class="listagem">
+    </div>
+    <script src="/scripts/main.js"></script>
+</body>
+
+</html>
