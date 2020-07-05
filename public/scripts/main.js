@@ -36,11 +36,14 @@ const realizaFiltro = () => {
         var xhttp = new XMLHttpRequest();
         listagem = document.querySelector(".listagem");
         listagem.removeChild(listagem.childNodes[0]);
+        searching = document.createTextNode("Searching...");
+        listagem.appendChild(searching);
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 results = JSON.parse(this.responseText)
                 console.log(results)
                 listagem = document.querySelector(".listagem")
+                listagem.removeChild(listagem.childNodes[0]);
                 listElement = document.createElement("ul")
                 for (item of results) {
                     listElement.innerHTML += `<li>${item.name}<ul><li>${item.classfication}</li></ul></li>`
