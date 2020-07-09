@@ -33,44 +33,60 @@ populaListas()
     });
 
 const realizaFiltro = () => {
-        var xhttp = new XMLHttpRequest();
-        listagem = document.querySelector(".listagem");
-        listagem.removeChild(listagem.childNodes[0]);
-        searching = document.createTextNode("Searching...");
-        listagem.appendChild(searching);
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                results = JSON.parse(this.responseText)
-                console.log(results)
-                listagem = document.querySelector(".listagem")
-                listagem.removeChild(listagem.childNodes[0]);
-                listElement = document.createElement("ul")
-                for (item of results) {
-                    listElement.innerHTML += `<li>${item.name}<ul><li>${item.classfication}</li></ul></li>`
-                }
-                listagem.appendChild(listElement);
+    var xhttp = new XMLHttpRequest();
+    listagem = document.querySelector(".listagem");
+    listagem.removeChild(listagem.childNodes[0]);
+    searching = document.createTextNode("Searching...");
+    listagem.appendChild(searching);
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            results = JSON.parse(this.responseText)
+            console.log(results)
+            listagem = document.querySelector(".listagem")
+            listagem.removeChild(listagem.childNodes[0]);
+            listElement = document.createElement("ul")
+            for (item of results.data.pokemonSample) {
+                listElement.innerHTML += `<li>${item.name}<ul><li>${item.classfication}</li></ul></li>`
             }
-        };
-
-        genElement = document.querySelector("#generation")
-        generation = genElement.options[genElement.selectedIndex].value
-        abilityElement = document.querySelector("#abilities")
-        ability = abilityElement.options[abilityElement.selectedIndex].value
-        type1Element = document.querySelector("#type1")
-        type1 = type1Element.options[type1Element.selectedIndex].value
-        type2Element = document.querySelector("#type2")
-        type2 = type2Element.options[type2Element.selectedIndex].value
-        legRadioOpt = document.querySelectorAll("[name=legendary]")
-        if (legRadioOpt[0].checked) {
-            isLeg = 'true';
-        } else if(legRadioOpt[1].checked){
-            isLeg = 'false';
-        } else {
-            isLeg = "";
+            listagem.appendChild(listElement);
         }
-        xhttp.open("GET", `/filter?generation=${generation}&type1=${type1}&type2=${type2}&ability=${ability}&is_leg=${isLeg}`, true);
-        xhttp.send();
+    };
+
+    genElement = document.querySelector("#generation")
+    generationValue = genElement.options[genElement.selectedIndex].value
+    abilityElement = document.querySelector("#abilities")
+    ability = abilityElement.options[abilityElement.selectedIndex].value
+    type1Element = document.querySelector("#type1")
+    type1 = type1Element.options[type1Element.selectedIndex].value
+    type2Element = document.querySelector("#type2")
+    type2 = type2Element.options[type2Element.selectedIndex].value
+    legRadioOpt = document.querySelectorAll("[name=legendary]")
+    if (legRadioOpt[0].checked) {
+        isLeg = true;
+    } else if (legRadioOpt[1].checked) {
+        isLeg = false;
+    } else {
+        isLeg = "";
     }
+    xhttp.open("POST", '/filter', true);
+    // xhttp.open("GET", `/filter?generation=${generation}&type1=${type1}&type2=${type2}&ability=${ability}&is_leg=${isLeg}`, true);
+    const query = `query QueryPokemon($sampleSize: Int!, $isLeg: Boolean!, $gen: Int, $type1: String, $type2: String, $ability: String) {
+        pokemonSample(sampleSize: $sampleSize, is_leg: $isLeg, generation: $gen, type1: $type1, type2: $type2, ability: $ability) {
+            name
+            classfication
+        }
+    }`
+    sampleSize = 10;
+    const gen = Number(generationValue)
+    const variables = {sampleSize, isLeg, gen, type1, type2, ability}
+    xhttp.setRequestHeader('Content-Type','application/json');
+    xhttp.setRequestHeader('Accept','application/json');
+    xhttp.send(JSON.stringify({
+        query,
+        variables
+    })
+    );
+}
 
 buttonElement = document.querySelector("#search")
 buttonElement.onclick = realizaFiltro
