@@ -76,9 +76,11 @@ const realizaFiltro = () => {
             classfication
         }
     }`
+    console.log(query)
     sampleSize = 10;
     const gen = Number(generationValue)
     const variables = {sampleSize, isLeg, gen, type1, type2, ability}
+    console.log(variables)
     xhttp.setRequestHeader('Content-Type','application/json');
     xhttp.setRequestHeader('Accept','application/json');
     xhttp.send(JSON.stringify({

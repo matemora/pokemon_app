@@ -28,5 +28,9 @@
     "graphql-tools": "^6.0.12",
     "mongoose": "^5.9.22",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^1.0.0-pre.51",
+    "typescript": "^3.9.6"
   }
 }

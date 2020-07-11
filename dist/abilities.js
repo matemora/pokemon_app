@@ -1,4 +1,7 @@
-const abilities = [
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.type = exports.generation = exports.abilities = void 0;
+exports.abilities = [
     "Overgrow",
     "Blaze",
     "Torrent",
@@ -338,9 +341,9 @@ const abilities = [
     "Tangling Hair",
     "Galvanize",
     "Power of Alchemy"
-    ];
-const generation = [1,2,3,4,5,6,7]; 
-const type = [
+];
+exports.generation = [1, 2, 3, 4, 5, 6, 7];
+exports.type = [
     "Grass",
     "Fire",
     "Water",
@@ -360,6 +363,3 @@ const type = [
     "Steel",
     "Flying"
 ];
-exports.abilities = abilities;
-exports.generation = generation;
-exports.type = type;

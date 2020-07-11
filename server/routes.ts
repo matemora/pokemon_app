@@ -1,5 +1,6 @@
-const { Router } = require('express')
-const filters = require('./abilities')
+import { Router } from 'express'
+import { abilities, type, generation } from './abilities'
+import path from 'path'
 
 const routes = Router();
 
@@ -9,10 +10,10 @@ routes.get('/', (req, res) => {
 
 routes.get('/listOptions', (req, res) => {
     res.send({
-        abilities: filters.abilities,
-        generation: filters.generation,
-        type: filters.type
+        abilities: abilities,
+        generation: generation,
+        type: type
     });
 });
 
-exports.routes = routes
+export default routes
