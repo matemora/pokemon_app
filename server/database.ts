@@ -1,11 +1,11 @@
 import * as dotenv from 'dotenv'
-dotenv.config({path: './dist/.env'})
+const result = dotenv.config()
 import mongoose from 'mongoose'
 import { IResolvers, makeExecutableSchema } from 'graphql-tools'
 import { GraphQLSchema } from 'graphql'
 
 const uri = `mongodb+srv://${process.env.DB_USR}:${process.env.DB_PASS}@cluster0.9aerh.gcp.mongodb.net/${process.env.DB_COLL}?retryWrites=true&w=majority`
-console.log(uri)
+
 export const connectToMongo = async () => {
     try {
         await mongoose.connect(uri, {

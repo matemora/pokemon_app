@@ -16,5 +16,5 @@ app.use(routes);
 server.applyMiddleware({ app, path: '/filter' });
 
 app.listen(3001, () => {
-  console.log('Server running at http://localhost:3001');
+  console.log('Server running free at http://localhost:3001');
 });
