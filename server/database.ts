@@ -3,6 +3,7 @@ const result = dotenv.config()
 import mongoose from 'mongoose'
 import { IResolvers, makeExecutableSchema } from 'graphql-tools'
 import { GraphQLSchema } from 'graphql'
+import { abilities, type, generation } from './abilities'
 
 const uri = `mongodb+srv://${process.env.DB_USR}:${process.env.DB_PASS}@cluster0.9aerh.gcp.mongodb.net/${process.env.DB_COLL}?retryWrites=true&w=majority`
 
@@ -202,7 +203,8 @@ interface IFilter {
 export const pokemonSchema = model('Pokemon', PokemonSchema);
 
 const typeDefs = `
-    type Query { pokemonSample(sampleSize: Int!, is_leg: Boolean!, generation: Int, type1: String, type2: String, ability: String): [Pokemon]! }
+    type Query { pokemonSample(sampleSize: Int!, is_leg: Boolean!, generation: Int, type1: String, type2: String, ability: String): [Pokemon]!
+        listOptions: Options }
     type Pokemon {
       name: String
       japanese_name: String
@@ -237,6 +239,11 @@ const typeDefs = `
       against_ground: Float
       against_grass: Float
       }
+      type Options {
+          abilities: [String]!
+          type: [String]!
+          generation: [Int]!
+      }
   `;
 
 const resolvers: IResolvers = {
@@ -265,8 +272,15 @@ const resolvers: IResolvers = {
             const aggregation = pokemonSchema.aggregate(aggPipeLine).exec();
             const agreg = await aggregation;
             return agreg
+        },
+        listOptions: async (_: void, args: void) => {
+            return {
+                abilities,
+                type,
+                generation
+            }
         }
-    },
+    }
 };
 
 const schema: GraphQLSchema = makeExecutableSchema({

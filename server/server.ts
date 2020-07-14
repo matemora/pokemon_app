@@ -14,6 +14,7 @@ app.use(express.static(path.normalize(__dirname + '/../public')));
 app.use(routes);
 
 server.applyMiddleware({ app, path: '/filter' });
+server.applyMiddleware({ app, path: '/listOptions' });
 
 app.listen(3001, () => {
   console.log('Server running free at http://localhost:3001');
